@@ -1,0 +1,57 @@
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main {
+    static List<Funcionario> funcionarios = new ArrayList<>();
+
+    public static void adicionarFuncionario(Funcionario f) {
+        funcionarios.add(f);
+        System.out.println("Funcionário adicionado: " + f.getNome());
+    }
+
+    public static void listarFuncionarios() {
+        System.out.println("\n--- Lista de Funcionários ---");
+        for (Funcionario f : funcionarios) {
+            System.out.println(f);
+        }
+    }
+
+    public static void atualizarFuncionario(int id, double novoSalario, String novoCargo) {
+        for (Funcionario f : funcionarios) {
+            if (f.getId() == id) {
+                f.setSalario(novoSalario);
+                f.setCargo(novoCargo);
+                System.out.println("Funcionário atualizado: " + f.getNome());
+                return;
+            }
+        }
+        System.out.println("Funcionário com ID " + id + " não encontrado.");
+    }
+
+    public static void removerFuncionario(int id) {
+        funcionarios.removeIf(f -> f.getId() == id);
+        System.out.println("Funcionário removido com ID: " + id);
+    }
+
+    public static void main(String[] args) {
+        Funcionario f1 = new Funcionario(
+            1, "João Silva", 32, "11999999999", "Rua das Flores, 123",
+            "Atendente", 2500.0, "Maria Silva - 11988888888",
+            new String[]{"VR", "VT", "Vacinas"}
+        );
+
+        Funcionario f2 = new Funcionario(
+            2, "Ana Costa", 28, "11977777777", "Av. Brasil, 456",
+            "Gestora", 4500.0, "Carlos Costa - 11966666666",
+            new String[]{"VR", "VT", "CIPA"}
+        );
+
+        adicionarFuncionario(f1);
+        adicionarFuncionario(f2);
+        listarFuncionarios();
+
+        atualizarFuncionario(1, 2700.0, "Atendente 2");
+        removerFuncionario(2);
+        listarFuncionarios();
+    }
+}
